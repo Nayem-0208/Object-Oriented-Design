@@ -1,0 +1,93 @@
+//*************************************************************************
+// Title : A java programme to demonstrate Dependency Inversion Principle.
+// Author : Md.Nayem Hossain, Undergrduate student, Khulna University.
+//*************************************************************************/**
+ * The SMSService class provides an implementation of the MessageService interface for sending SMS messages.
+ */
+public class SMSService implements MessageService {
+    /**
+     * Sends an SMS message.
+     *
+     * @param message the message content to be sent via SMS
+     */
+    @Override
+    public void sendMessage(String message) {
+        // Simulate sending an SMS
+        System.out.println("Sending SMS: " + message);
+    }
+}
+
+/**
+
+
+/**
+ * The EmailService class provides an implementation of the MessageService interface for sending emails.
+ */
+public class EmailService implements MessageService {
+    /**
+     * Sends an email message.
+     *
+     * @param message the message content to be sent via email
+     */
+    @Override
+    public void sendMessage(String message) {
+        // Simulate sending an email
+        System.out.println("Sending email: " + message);
+    }
+}
+/**
+ * The NotificationService class provides a mechanism for sending notifications using a specified MessageService.
+ * It follows the dependency inversion principle by depending on the MessageService interface.
+ */
+public class NotificationService {
+    private final MessageService messageService;
+
+    /**
+     * Constructs a NotificationService with the specified MessageService.
+     *
+     * @param messageService the message service implementation to be used for sending notifications
+     */
+    public NotificationService(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    /**
+     * Sends a notification message using the configured MessageService.
+     *
+     * @param message the notification message to be sent
+     */
+    public void sendNotification(String message) {
+        // Utilize the message service to send notifications
+        messageService.sendMessage(message);
+    }
+}
+/**
+ * The DIP class demonstrates the Dependency Inversion Principle (DIP) by creating instances of low-level modules
+
+ */
+public class DIP {
+    /**
+     * The main method creates instances of low-level modules (EmailService and SMSService) and high-level modules
+     * (NotificationService) with different implementations injected. It then uses the high-level modules to send notifications.
+     */
+    public static void main(String[] args) {
+        // Create instances of low-level modules
+        MessageService emailService = new EmailService();
+        MessageService smsService = new SMSService();
+
+        // Create instances of high-level module with different implementations injected
+        NotificationService emailNotificationService = new NotificationService(emailService);
+        NotificationService smsNotificationService = new NotificationService(smsService);
+
+        // Use the high-level module to send notifications
+        emailNotificationService.sendNotification("Hello, this is an email notification!");
+        smsNotificationService.sendNotification("Hello, this is an SMS notification!");
+    }
+}
+/**
+ * Its defining interfaces (MessageService) for sending messages and providing concrete implementations (SMSService, EmailService).
+ * The  NotificationServic class encapsulates the mechanism for sending notifications using a 
+ * specified message service, following DIP by depending on abstractions. The  DIP class demonstrates 
+ * the usage of low-level modules (SMSService and EmailService) and high-level modules (NotificationService) 
+ * with different implementations injected, showcasing adherence to the Dependency Inversion Principle.
+ */
