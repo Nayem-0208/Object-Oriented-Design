@@ -4,6 +4,18 @@
 //*************************************************************************/**
  * The SMSService class provides an implementation of the MessageService interface for sending SMS messages.
  */
+
+/**
+ * The MessageService interface defines a contract for sending messages.
+ */
+public interface MessageService {
+    /**
+     * Sends a message.
+     *
+     * @param message the message to be sent
+     */
+    void sendMessage(String message);
+}
 public class SMSService implements MessageService {
     /**
      * Sends an SMS message.
