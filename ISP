@@ -1,0 +1,165 @@
+//*************************************************************************
+// Title : A java programme to demonstrate Interface Segregation Principle.
+// Author : Md.Nayem Hossain, Undergrduate student, Khulna University.
+//*************************************************************************
+
+/**
+
+
+
+/**
+ * The Scanner interface defines a contract for scanning operations.
+ * Implementing classes should provide the functionality to scan and return scanned data.
+ */
+public interface Scanner {
+    /**
+     * Scans and returns the scanned data.
+     *
+     * @return the scanned data as a String
+     */
+    String scan();
+}
+/**
+ * The Fax interface defines a contract for faxing operations.
+ * Implementing classes should provide the functionality to fax a document.
+ */
+public interface Fax {
+    /**
+     * Sends the specified document via fax.
+     *
+     * @param document the document to be faxed
+     */
+    void fax(String document);
+}
+/**
+ * The BasicPrinter class provides an implementation of the Printer interface for basic printing functionality.
+ */
+public class BasicPrinter implements Printer {
+    /**
+     * Prints the specified document.
+     *
+     * @param document the document to be printed
+     */
+    @Override
+    public void print(String document) {
+        System.out.println("Basic printing: " + document);
+    }
+}
+/**
+ * The BasicScanner class provides an implementation of the Scanner interface for basic scanning functionality.
+ */
+public class BasicScanner implements Scanner {
+    /**
+     * Performs a basic scanning operation and returns the scanned data.
+     *
+     * @return the scanned data
+     */
+    @Override
+    public String scan() {
+        return "Basic scanning";
+    }
+}
+/**
+ * The MultiFunctionMachine class provides an implementation of the Printer, Scanner, and Fax interfaces,
+ * combining multi-functionality for printing, scanning, and faxing.
+ */
+public class MultiFunctionMachine implements Printer, Scanner, Fax {
+    /**
+     * Prints the specified document.
+     *
+     * @param document the document to be printed
+     */
+    @Override
+    public void print(String document) {
+        System.out.println("Multi-function printing: " + document);
+    }
+
+    /**
+     * Performs a multi-function scanning operation and returns the scanned data.
+     *
+     * @return the scanned data
+     */
+    @Override
+    public String scan() {
+        return "Multi-function scanning";
+    }
+
+    /**
+     * Sends the specified document via fax.
+     *
+     * @param document the document to be faxed
+     */
+    @Override
+    public void fax(String document) {
+        System.out.println("Multi-function faxing: " + document);
+    }
+}
+/**
+ * The User class represents a user who interacts with different devices such as printers, scanners, and fax machines.
+ */
+public class User {
+    /**
+     * Uses the specified printer to print the given document.
+     *
+     * @param printer  the printer to be used
+     * @param document the document to be printed
+     */
+    public void usePrinter(Printer printer, String document) {
+        printer.print(document);
+    }
+
+    /**
+     * Uses the specified scanner to scan a document and prints the scanned data.
+     *
+     * @param scanner the scanner to be used
+     */
+    public void useScanner(Scanner scanner) {
+        System.out.println("Scanned document: " + scanner.scan());
+    }
+
+    /**
+     * Uses the specified fax machine to send the given document via fax.
+     *
+     * @param fax      the fax machine to be used
+     * @param document the document to be faxed
+     */
+    public void useFax(Fax fax, String document) {
+        fax.fax(document);
+    }
+}
+/**
+ * The ISP class demonstrates the Interface Segregation Principle (ISP) by showing how different clients can use
+
+ * This main method demonstrates the usage of various devices by a user, showcasing adherence to the Interface
+ * Segregation Principle.
+ */
+public class ISP {
+    /**
+     * The main method demonstrates the usage of various devices by a user, showcasing adherence to the Interface
+     * Segregation Principle.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(String[] args) {
+        User user = new User();
+
+        // Using BasicPrinter
+        Printer basicPrinter = new BasicPrinter();
+        user.usePrinter(basicPrinter, "Test document");
+
+        // Using BasicScanner
+        Scanner basicScanner = new BasicScanner();
+        user.useScanner(basicScanner);
+
+        // Using MultiFunctionMachine
+        MultiFunctionMachine multiFunctionMachine = new MultiFunctionMachine();
+        user.usePrinter(multiFunctionMachine, "Multi-function test document");
+        user.useScanner(multiFunctionMachine);
+        user.useFax(multiFunctionMachine, "Faxing test document");
+    }
+}
+/**
+ * This Java program demonstrates the Interface by scanning and faxing operations, and providing implementations for printing, scanning, and faxing functionalities. 
+ * The  User class represents a user who interacts with different devices such as printers, scanners, and fax 
+ * machines through their respective interfaces.
+ */
