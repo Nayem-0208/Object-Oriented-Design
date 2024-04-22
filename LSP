@@ -1,0 +1,147 @@
+//*************************************************************************
+// Title : A java programme to demonstrate Liskov Substitution Principle.
+// Author : Md.Nayem Hossain, Undergrduate student, Khulna University.
+//*************************************************************************
+
+/**
+
+/**
+ * The Square class represents a square shape.
+ */
+public class Square extends Shape {
+    private double side; // Length of the square's side
+
+    /**
+     * Constructs a square with the specified side length.
+     *
+     * @param side the length of the side of the square
+     */
+    public Square(double side) {
+        this.side = side;
+        this.area = calculateArea(); // Calculate and set the area
+    }
+
+    /**
+     * Gets the length of the side of the square.
+     *
+     * @return the length of the side
+     */
+    public double getSide() {
+        return side;
+    }
+
+    /**
+     * Calculates the area of the square.
+     *
+     * @return the area of the square
+     */
+    private double calculateArea() {
+        return side * side; // Area of a square is side * side
+    }
+}
+/**
+ * The AreaCalculator class provides a method to calculate the area of a given shape.
+ */
+public class AreaCalculator {
+    /**
+     * Calculates the area of the provided shape.
+     *
+     * @param shape the shape for which to calculate the area
+     * @return the area of the shape
+     */
+    public double calculateShapeArea(Shape shape) {
+        return shape.getArea();
+    }
+}
+/**
+ * The Shape class represents a geometric shape with an area.
+ */
+public class Shape {
+    protected double area; // The area of the shape
+
+    /**
+     * Retrieves the area of the shape.
+     *
+     * @return the area of the shape
+     */
+    public double getArea() {
+        return area;
+    }
+}
+/**
+ * The Rectangle class represents a rectangle shape.
+ */
+public class Rectangle extends Shape {
+    private double width; // Width of the rectangle
+    private double height; // Height of the rectangle
+
+    /**
+     * Constructs a rectangle with the specified width and height.
+     *
+     * @param width  the width of the rectangle
+     * @param height the height of the rectangle
+     */
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+        this.area = calculateArea(); // Calculate and set the area
+    }
+
+    /**
+     * Gets the width of the rectangle.
+     *
+     * @return the width of the rectangle
+     */
+    public double getWidth() {
+        return width;
+    }
+
+    /**
+     * Gets the height of the rectangle.
+     *
+     * @return the height of the rectangle
+     */
+    public double getHeight() {
+        return height;
+    }
+
+    /**
+     * Calculates the area of the rectangle.
+     *
+     * @return the area of the rectangle
+     */
+    private double calculateArea() {
+        return width * height; // Area of a rectangle is width * height
+    }
+}
+
+/**
+ * The LSP class demonstrates the Liskov Substitution Principle (LSP) by calculating the areas of rectangles and squares.
+ */
+public class LSP {
+    /**
+     * The main method demonstrates the usage of the AreaCalculator class to calculate the areas of rectangles and squares.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(String[] args) {
+        Shape rectangle = new Rectangle(5, 4); // Create a rectangle
+        Shape square = new Square(3); // Create a square
+
+        AreaCalculator calculator = new AreaCalculator(); // Create an area calculator
+
+        // Calculate areas
+        double rectangleArea = calculator.calculateShapeArea(rectangle);
+        double squareArea = calculator.calculateShapeArea(square);
+
+        // Print results
+        System.out.println("Rectangle Area: " + rectangleArea);
+        System.out.println("Square Area: " + squareArea);
+    }
+}
+/**
+ * This Java program demonstrates the Liskov Substitution Principle (LSP) by defining 
+ * geometric shapes (Rectangle and Square) inheriting from a common superclass (Shape). 
+ * Each shape calculates its area independently.The  AreaCalculator class utilizes 
+ * the  Shape interface to calculate the area of any shape passed to it.
+ */
