@@ -1,0 +1,114 @@
+//*************************************************************************
+// Title : A java programme to demonstrate Open Closed Principle.
+// Author : Md.Nayem Hossain, Undergrduate student, Khulna University.
+//*************************************************************************
+
+/**
+
+/**
+ * The Shape interface defines a contract for shapes to calculate their area.
+ */
+public interface Shape {
+    /**
+     * Calculates the area of the shape.
+     *
+     * @return the area of the shape
+     */
+    double calculateArea();
+}
+/**
+ * The Rectangle class represents a rectangle shape.
+ */
+public class Rectangle implements Shape {
+    private double width; // Width of the rectangle
+    private double height; // Height of the rectangle
+
+    /**
+     * Constructs a rectangle with the specified width and height.
+     *
+     * @param width  the width of the rectangle
+     * @param height the height of the rectangle
+     */
+    Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    /**
+     * Calculates the area of the rectangle.
+     *
+     * @return the area of the rectangle
+     */
+    @Override
+    public double calculateArea() {
+        return width * height;
+    }
+}
+/**
+ * The Circle class represents a circle shape.
+ */
+public class Circle implements Shape {
+    private double radius; // Radius of the circle
+
+    /**
+     * Constructs a circle with the specified radius.
+     *
+     * @param radius the radius of the circle
+     */
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    /**
+     * Calculates the area of the circle.
+     *
+     * @return the area of the circle
+     */
+    @Override
+    public double calculateArea() {
+        return Math.PI * radius * radius; // Area of a circle is π * r^2
+    }
+}
+/**
+ * The AreaCalculator class provides a method to calculate the area of a given shape.
+ */
+public class AreaCalculator {
+    /**
+     * Calculates the area of the provided shape.
+     *
+     * @param shape the shape for which to calculate the area
+     * @return the area of the shape
+     */
+    public double calculateShapeArea(Shape shape) {
+        return shape.calculateArea();
+    }
+}
+/**
+ * The OCP class demonstrates the Open/Closed Principle (OCP) by calculating the areas of a rectangle and a circle.
+ */
+public class OCP {
+    /**
+     * The main method demonstrates the usage of the AreaCalculator class to calculate the areas of a rectangle and a circle.
+     *
+     * @param args command-line arguments (not used)
+     */
+    public static void main(String[] args) {
+        Shape rectangle = new Rectangle(5, 4); // Create a rectangle
+        Shape circle = new Circle(3); // Create a circle
+
+        AreaCalculator calculator = new AreaCalculator(); // Create an area calculator
+
+        // Calculate areas
+        double rectangleArea = calculator.calculateShapeArea(rectangle);
+        double circleArea = calculator.calculateShapeArea(circle);
+
+        // Print results
+        System.out.println("Rectangle Area: " + rectangleArea);
+        System.out.println("Circle Area: " + circleArea);
+    }
+}
+/**
+ * This Java program demonstrates the Open/Closed Principle (OCP) by defining a Shape interface 
+ * to calculate the area of different shapes. It includes concrete implementations for  Rectangle
+ * and  Circle shapes, each adhering to the  Shape interface.
+ */
